@@ -22,7 +22,7 @@ void append(char **source,char **addition){
     char **ptr1=source;
     while(**addition != '\0'){
         char *address=*source;
-        (*ptr1)++;
+        address=address+1;
         (*addition)++;
     }
 }
