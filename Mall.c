@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 void show_bank_balance();
@@ -18,25 +19,11 @@ void show_bank_balance();
     }
 }*/
 
-void append(char **source,char **addition){
-    char **ptr1=source;
-    while(**addition != '\0'){
-        char *address=*source;
-        address=address+1;
-        (*addition)++;
-    }
-}
+char * convertToString();
 void main()
 {
-    char *ptr="Hello";
-    char *ptr2=" World";
-    append(&ptr,&ptr2);
-    printf("%s",ptr);
+   	char  *str=malloc(10);
+	strcat(str,"id: ");
+	sprintf(str,"%d",100);
+	printf("%s",str);
 }
-/*char * convertToString(){
-    int n;
-    scanf("%d",&n);
-    char *ptr=malloc(sizeof(char) * 500); /* size of char is although 1 so,
-    malloc will allocate 500 bytes of memory to pointer*//*
-    itoa(n,ptr,10);
-}*/

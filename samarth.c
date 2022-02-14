@@ -1,17 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-struct ItemVariant{
-    int parentId, id;
-    char variant_name[100];
-    double price;
-};
 struct Item{
     int id;
     double price;
     char name[100];
     char description[256];
-    struct ItemVariant variants[4];
 };
 /*
 Functions :
@@ -48,22 +42,25 @@ void createItem(){
     int vc=0;// counts number of variants
     printf("Enter Variants count (if any else 0)");
     scanf("%d",&vc);
-    struct ItemVariant variants[vc];
-    while(--vc>-1){
-        printf("Enter Variant Details\nName : ");
-        gets(variants[vc].variant_name);
-        printf("Price : ₹");
-        scanf("%lf",&variants[vc].price);
-        variants[vc].parentId=id;
-        variants[vc].id=vc+1; //Variant Id of any given parent is the incremented value of it's index.
-        printf("\n");
-    }
 
 }
 char * convertToString(struct Item item){
-    char *ptr=malloc(sizeof(char) * 500); /* size of char is although 1 so,
-    malloc will allocate 500 bytes of memory to pointer*/
-    itoa(item.id,ptr,10);
+    	char *ptr=malloc(sizeof(char) * 500); /* size of char is although 1 so,
+    	malloc will allocate 500 bytes of memory to pointer*/
+    	//Adding id to string
+	char *idptr=malloc(sizeof(int) * 4);//allocating 16 bytes of memory to pointer
+    	sprintf(idptr,"%d",item.id);
+	strcat(ptr,"id: ");
+	strcat(ptr,idptr);
+	strcat(ptr," name: ");
+	strcat(ptr,item.name);
+	strcat(ptr," description: ");
+	strcat(ptr,item.description);
+	char *priceptr=malloc(sizeof(double) * 10);//allocating  memory to price pointer
+	strcat(ptr," price: ");
+	sprintf(priceptr,"%lf",item.price);
+	strcat(ptr,priceptr);
+	return ptr; 
 }
 int saveItem(char data[]){
     int saved=0;
