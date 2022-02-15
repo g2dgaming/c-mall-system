@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+void show_bank_balance();
 /*int main(){
     int choice=0;
     printf("Welcome to The Mall\nEnter Your Choice\n1.View Bank Balance\n");
@@ -17,6 +18,8 @@
         break;
     }
 }*/
+
+char * convertToString();
 void main()
 {
    	char  *str=malloc(10);

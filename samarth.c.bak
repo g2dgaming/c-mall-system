@@ -18,6 +18,7 @@ void load();
 void print(struct Item item);
 void print_all();
 void clear();
+struct Item find(int id);
 void desanatize(char **str);
 void sanatize(char **str);
 void openAdminMenu(){
@@ -99,6 +100,14 @@ void load(){
 			current_index=index-2;
 		}
 		
+}
+struct Item find(int id){
+	for(int x=0;x<=current_index;x++){
+		if(items[x].id == id){
+			return items[x];
+		}
+	}
+	return items[0];
 }
 void getInput(struct Item *item,int isNew){
 	if(isNew){
