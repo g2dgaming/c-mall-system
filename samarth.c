@@ -20,12 +20,13 @@ void print_all();
 void clear();
 void desanatize(char **str);
 void sanatize(char **str);
+void listGroceryItems();
 void openAdminMenu(){
     printf("Welcome Admin!\n");
     int ch=-1;
 	load();
     do{
-		printf("Enter Your Choice\n1.Create a new item\n2.List Items\n3.Edit existing item\nEnter -1 to Exit\n");
+		printf("Enter Your Choice\n1.Create a new item\n2.List Items\nEnter -1 to Exit\n");
         scanf("%d",&ch);
 		struct Item item;
         switch (ch)
@@ -39,14 +40,17 @@ void openAdminMenu(){
 			items[++current_index]=item;
 			break;
 			case 2:
-			clear();
-			load();
-			print_all();
+			listGroceryItems();			
 			break;				
             default:
             break;
         }
     }while(ch!=-1);
+}
+void listGroceryItems(){
+	clear();
+	load();
+	print_all();
 }
 void print_all(){
 	for(int x=0;x<=current_index;x++){
@@ -84,7 +88,7 @@ void desanatize(char **str){
 void load(){
 		int index=0;
 		FILE *pointer; //Reading from file 
-		pointer=fopen("groceryDatabase.c","r");
+		pointer=fopen("groceryDatabase","r");
 		int ch=0;
 		while(ch != EOF){
 			items[index].name=malloc(sizeof(char) * MAX_NAME_SIZE);
@@ -146,19 +150,13 @@ char * convertToString(struct Item item){
 int saveItem(char *data){
     int saved=0;
     FILE *ptr ;
-	// Open the existing file groceryDatabase.c using fopen()
-	// in write mode using "w" attribute
-	ptr = fopen("groceryDatabase.c", "ab+") ;
-	
-	// Check if this filePointer is null
-	// which maybe if the file does not exist
+	ptr = fopen("groceryDatabase", "ab+") ;
 	if ( ptr == NULL )
 	{
 		printf( "Database file not found\n" ) ;
 	}
 	else
 	{		
-		// Write the data to be written into the file
 		if ( strlen ( data ) > 0 )
 		{			
 			// writing in the file using fputs()
@@ -169,12 +167,5 @@ int saveItem(char *data){
 		// Closing the file using fclose()
 		fclose(ptr) ;
 	}
-	return saved;	
-    
-}
-void main(){
-	openAdminMenu();
-	/*char *test="Tata Salt";
-	sanatize(&test);
-	printf("%s\n",test);*/
+	return saved;	    
 }
